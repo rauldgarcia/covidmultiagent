@@ -79,7 +79,9 @@ tipodemuestra(intubado,lavadobronquioalveolar).
     }.
 
 //si recibe un caso sospechoso le indica que se ponga cubrebocas
-+caso(X,sospechoso)[source(self)] <-
++caso(X,sospechoso)[source(self)] <- 
+    .print("Lo vamos a tener que aislar.");
+    .send(X,tell,aislado);
     .print("Pongase cubrebocas.");
     .send(X,achieve,colocarcubrebocas);
     .send(X,askOne,status(Y)).
@@ -93,3 +95,11 @@ tipodemuestra(intubado,lavadobronquioalveolar).
 //regla para colocar cubrebocas
 +!colocarcubrebocas(boca,nariz)[source(_)] <-
     .send(self,tell,colocarcubrebocas(boca,nariz)).
+
+//se le informa al paciente el resultado de su prueba
+//y se borra de las creencias que el caso era sospechoso
++caso(X,Resultado)[source(_)] <-
+    .send(X,untell,caso(sospechoso));
+    .send(X,tell,caso(Resultado));
+    .print(X , " su prueba dio " , Resultado, ".");
+    .send(self,untell,caso(X,sospechoso)).

@@ -5,7 +5,7 @@ enfermedadrespiratoria(aguda).
 contacto(no).
 viaje(china).
 dias(10).
-status(intubado).
+status(normal).
 
 /* Initial goals */
 
@@ -23,7 +23,7 @@ status(intubado).
 +!colocarcubrebocas[source(X)] :true <-
     .send(X,askHow, {+!colocarcubrebocas(_,_)[source(_)]});
     .print("¿Como se coloca el cubrebocas?");
-    .wait(500);
+    .wait(50);
     .print("Se coloca: ");
     .list_plans({+!colocarcubrebocas(_,_)[source(_)]});
     .print;
