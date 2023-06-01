@@ -81,7 +81,14 @@ tipodemuestra(intubado,lavadobronquioalveolar).
 //si recibe un caso sospechoso le indica que se ponga cubrebocas
 +caso(X,sospechoso)[source(self)] <-
     .print("Pongase cubrebocas.");
-    .send(X,achieve,colocarcubrebocas).
+    .send(X,achieve,colocarcubrebocas);
+    .send(X,askOne,status(Y)).
+
+//le dice al epidemiologo que le realice la prueba al paciente
+// y le indica el estatus en el que esta el paciente
++status(Y)[source(X)] <-
+    .send(epidemiologo,achieve,realiceprueba(X,Y));
+    .print("El epidemiologo le hara la prueba de Covid.").
     
 //regla para colocar cubrebocas
 +!colocarcubrebocas(boca,nariz)[source(_)] <-

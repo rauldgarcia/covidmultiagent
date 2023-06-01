@@ -5,6 +5,7 @@ enfermedadrespiratoria(aguda).
 contacto(no).
 viaje(china).
 dias(10).
+status(intubado).
 
 /* Initial goals */
 
