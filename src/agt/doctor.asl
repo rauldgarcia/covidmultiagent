@@ -1,7 +1,8 @@
 // Agent doctor in project tarea5
 
 /* Initial beliefs and rules */
-
+tipodemuestra(defuncion,biopsiapulmonar).
+tipodemuestra(intubado,lavadobronquioalveolar).
 
 /* Initial goals */
 
@@ -76,3 +77,12 @@
         .send(self,tell,caso(Y,nosospechoso));
         .print("Usted no es caso sospechoso");
     }.
+
+//si recibe un caso sospechoso le indica que se ponga cubrebocas
++caso(X,sospechoso)[source(self)] <-
+    .print("Pongase cubrebocas.");
+    .send(X,achieve,colocarcubrebocas).
+    
+//regla para colocar cubrebocas
++!colocarcubrebocas(boca,nariz)[source(_)] <-
+    .send(self,tell,colocarcubrebocas(boca,nariz)).
