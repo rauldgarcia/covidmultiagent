@@ -14,8 +14,9 @@ MAS tarea5 {
 
     environment: example.Env(10)
 
-    agents: epidemiologo;
-            paciente;
+    agents: fernanda;
+            epidemiologo;
+            pancho;
             doctor;
 
     aslSourcePath: "src/agt";
