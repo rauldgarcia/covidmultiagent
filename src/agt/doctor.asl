@@ -1,13 +1,16 @@
 // Agent doctor in project tarea5
 
 /* Initial beliefs and rules */
+//lista de enfermedades
 enfermedadrespiratoria(aguda).
 enfermedadrespiratoria(leve).
 enfermedadrespiratoria(grave).
 
+//lista de contactos
 contacto(casoconfirmado).
 contacto(bajoinvestigacion).
 
+//lista de paises
 viaje(china).
 viaje(hongkong).
 viaje(coreadelsur).
@@ -28,6 +31,7 @@ casosospechoso(Enfermedadrespiratoria,_,Viaje,Dias):-
     viaje(Viaje) &
     Dias < 15.
 
+//lista de tipos de muestras
 tipodemuestra(normal,exudadonasofaringeoyfaringeo).
 tipodemuestra(defuncion,biopsiapulmonar).
 tipodemuestra(intubado,lavadobronquioalveolar).
@@ -132,14 +136,9 @@ tipodemuestra(intubado,lavadobronquioalveolar).
     .print(X , " su prueba dio " , Resultado, ".");
     .send(self,untell,caso(X,sospechoso)).
 
+//si un paciente manda toda la informacion junta se hace un querie para ver si es sospechoso o no
 +state(Enfermedadrespiratoria,Contacto,Viaje,Dias)[source(X)] : X \== self <-
     ?casosospechoso(Enfermedadrespiratoria,Contacto,_,Dias);
     .send(X,tell,caso(sospechoso));
     .send(self,tell,caso(X,sospechoso));
     .print(X, " usted es caso sospechoso.").
-
-
-
-//agregar pacientes de ejemplo de clips
-//hacer que algunos de ellos manden toda la informacion en solo mensaje
-//y el doctor revise en sus creencias con las reglas implementadas en prolog

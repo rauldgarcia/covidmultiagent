@@ -7,8 +7,6 @@ viaje(china).
 dias(10).
 status(normal).
 
-
-
 /* Initial goals */
 
 //!start.
@@ -30,4 +28,3 @@ status(normal).
     .list_plans({+!colocarcubrebocas(_,_)[source(_)]});
     .print;
     .send(self,achieve,colocarcubrebocas(_,_)[source(_)]).
-
